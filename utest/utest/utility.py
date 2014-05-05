@@ -3,11 +3,11 @@
 
 """
 
-from os.path import join as path_join, abspath
+from unittest import TestCase
 from pkgutil import walk_packages
 from importlib import import_module
+from os.path import join as path_join, abspath
 from inspect import getmembers, isclass, ismethod
-from unittest import TestCase
 
 
 def get_modules(d_name):
@@ -25,10 +25,5 @@ def get_modules(d_name):
 
 
 
-def get_testcase(d_name="testfiles"):
+def get_testcases(d_name):
     return get_modules(d_name)
-
-
-
-def read_cmdline(line):
-    pass

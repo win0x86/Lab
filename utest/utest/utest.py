@@ -5,7 +5,7 @@
 
 """
 
-from utility import get_testcase
+from fp import runner
 
 try:
     from settings import utest_path
@@ -14,14 +14,7 @@ except:
 
 
 def main():
-    # 1. cmd
-    # 2. show
-    files = get_testcase(d_name=utest_path)
-    for k, v in files.iteritems():
-        print k
-        for i in v:
-            print "\t{0}".format(i)
-
+    runner(utest_path)
 
 
 if __name__ == "__main__":
