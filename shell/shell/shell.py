@@ -7,29 +7,23 @@ TODO:
 
     1. services get_members.
     2. example.
+    3. load all services.
 
 """
 
-from argparse import ArgumentParser
-from services import *
+
+from common.loader import loader
+
+try:
+    from settings import services_path
+except ImportError:
+    services_path = "services"
 
 
-def shell():
-    parser = ArgumentParser(description="help this prog", epilog="Author: xi4nyu")
-    parser.add_argument("-x", help="for the help")
-    args = parser.parse_args()
-
-    if args.x == "1":
-        print "ok"
-    elif args.x == "100":
-        one = One()
-        print one._cmd__
-        print one._help__
-        print one._arg__
-    else:
-        parser.print_help()
+def run():
+    loader(services_path)
 
 
 
 if __name__ == "__main__":
-    shell()
+    run()

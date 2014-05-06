@@ -9,7 +9,7 @@ from fp import runner
 
 try:
     from settings import utest_path
-except:
+except ImportError as ex:
     utest_path = "testfiles"
 
 
