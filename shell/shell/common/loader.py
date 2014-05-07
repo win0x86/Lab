@@ -36,6 +36,8 @@ def add_argument(modules):
         for cmd, arg in cmds:
             if cmd in commands and arg in commands[cmd]:
                 commands[cmd][arg]()
+            else:
+                print "%s invalid." % cmd
 
 
 def execute(cmd, arg):

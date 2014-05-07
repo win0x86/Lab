@@ -1,4 +1,4 @@
 # coding: utf-8
 
 
-services_path = "services"
+shell_path = "services"
