@@ -3,15 +3,13 @@
 from common.utility import cmd
 from common.base import CmdBase
 
-CMD = "-five"
 
-
-@cmd(CMD, "5", "help five")
+@cmd("-f1", "5", "params: 5")
 class FiveTest(CmdBase):
-    pass
+    def __call__(self):
+        print "five"
 
 
 
-#@cmd(CMD, "test5", "help five")
 class FiveTest2(object):
     pass

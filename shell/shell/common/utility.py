@@ -5,11 +5,12 @@ from os.path import isfile, abspath, join as path_join
 from inspect import getmembers, ismodule, isclass
 
 
-def cmd(c, arg, hlp):
+def cmd(c, arg, hlp, **kwargs):
     def wrap(cls):
         cls._cmd__ = c
         cls._arg__ = arg
         cls._hlp__ = hlp
+        cls._kwargs__ = kwargs
         return cls
 
     return wrap
@@ -61,8 +62,3 @@ def import_files(name, filter_func):
         raise
 
     return ret
-
-
-
-def is_module(path):
-    return isfile(path_join(abspath(path), "__init__.py"))

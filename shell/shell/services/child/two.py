@@ -3,11 +3,11 @@
 from common.utility import cmd
 from common.base import CmdBase
 
-CMD = "--ct"
 
-@cmd(CMD, "ct", "help x")
+@cmd("--ct1", "ct1", "params: ct1")
 class Two(CmdBase):
-    pass
+    def __call__(self):
+        print "child two"
 
 
 
@@ -15,6 +15,9 @@ class TwoTest(object):
     pass
 
 
-@cmd(CMD, "ctt", "help x")
+
+@cmd("--ct2", "ct2", "params: ct2")
 class TwoTest2(object):
-    pass
+    def __call__(self):
+        print "child two"
+

@@ -3,11 +3,11 @@
 from common.utility import cmd
 from common.base import CmdBase
 
-CMD = "-three"
 
-@cmd(CMD, "3", "help three")
+@cmd("-th1", "3", "params: 3")
 class Three(CmdBase):
-    pass
+    def __call__(self):
+        print "three"
 
 
 

@@ -5,6 +5,7 @@ class CmdBase(object):
     _cmd__ = ""
     _hlp__ = ""
     _arg__ = ""
+    _kwargs = {}
 
 
     @property
@@ -20,3 +21,8 @@ class CmdBase(object):
     @property
     def arg(self):
         return self._arg__
+
+
+    @property
+    def kwargs(self):
+        return self._kwargs__

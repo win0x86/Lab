@@ -16,14 +16,27 @@ def loader(path):
     add_argument(modules)
 
 
+
 def add_argument(modules):
-    cmdargs = {}
+    exists_cmd = set()
+    commands = {}
     parser = ArgumentParser(description="help this prog", epilog="Author: xi4nyu")
+
     for m in modules:
         o = m()
-        parser.add_argument(o.cmd, help=o.hlp)
-        cmdargs[m.cmd] = m.arg
+        if o.cmd in exists_cmd: raise ValueError("exists.")
+        parser.add_argument(o.cmd, help=o.hlp, **o.kwargs)
+        commands[o.cmd[o.cmd.rindex("-") + 1:]] = {o.arg: o}
 
     args = parser.parse_args()
-    print args
-    parser.print_help()
+    if not any(args.__dict__.values()):
+        parser.print_help()
+    else:
+        cmds = filter(lambda k: not k[0].startswith("__") and k[1], args.__dict__.iteritems())
+        for cmd, arg in cmds:
+            if cmd in commands and arg in commands[cmd]:
+                commands[cmd][arg]()
+
+
+def execute(cmd, arg):
+    pass

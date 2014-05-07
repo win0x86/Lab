@@ -3,18 +3,18 @@
 from common.utility import cmd
 from common.base import CmdBase
 
-CMD = "-one"
 
-@cmd(CMD, "1", "help one")
+@cmd("-o1", "1", "params: 1")
 class One(CmdBase):
-    def execute(self):
+    def __call__(self):
         print "one run"
 
 
 
-#@cmd(CMD, "test1", "help one")
-class OneTest(object):
-    pass
+@cmd("-o2", "v", "params: v")
+class OneTest(CmdBase):
+    def __call__(self):
+        pass
 
 
 

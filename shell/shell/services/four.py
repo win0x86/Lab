@@ -3,9 +3,8 @@
 from common.utility import cmd
 from common.base import CmdBase
 
-CMD = "-four"
 
-
-@cmd(CMD, "4", "help four")
+@cmd("-f", "4", "params: 4")
 class Four(CmdBase):
-    pass
+    def __call__(self):
+        print "four"
