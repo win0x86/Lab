@@ -5,7 +5,6 @@
 
 """
 
-from fp import runner
 
 try:
     from settings import utest_path
@@ -14,10 +13,24 @@ except ImportError as ex:
 
 
 def main():
-    runner(utest_path)
+    from shell import run
+    run()
+
+
+
+def test():
+    from unittest import TestCase
+    from common.utility import get_members
+    from pprint import pprint
+    from utility import get_testcases
+    path = "testfiles"
+    #modules = get_members(path, lambda m: issubclass(m, TestCase) and not m is TestCase)
+    modules = get_testcases(path, lambda v: issubclass(v, TestCase) and v is not TestCase)
+    pprint(modules)
+    print "\n"
+
 
 
 if __name__ == "__main__":
-    # main()
-    from shell import run
-    run()
+    #main()
+    test()

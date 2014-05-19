@@ -1,15 +1,27 @@
 # coding: utf-8
 
-"""???
+from unittest import TestCase
 
-"""
-
-from unittest import TextTestRunner
+from common.utility import cmd
+from common.base import CmdBase
+try:
+    from settings import utest_path
+except ImportError as ex:
+    utest_path = "testfiles"
 from utility import get_testcases
 
 
-def runner(utest_path):
-    cases = get_testcases(utest_path)
+
+@cmd("--show", "all", "all: show all utest.")
+class UTestShow(CmdBase):
+    def __call__(self):
+        show()
+
+
+
+def show():
+    cases = get_testcases(utest_path, lambda v: issubclass(v, TestCase) and v is not TestCase)
+    pprint(cases)
     no = 0
     blank = " "
     for k, v in cases.iteritems():

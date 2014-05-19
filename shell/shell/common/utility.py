@@ -26,8 +26,9 @@ EXISTS = set()
 def get_members(loc, filter_func=lambda s: s):
     modules = []
     
-    for module, name, ispkg in walk_packages("."):
-        if loc not in name: continue
+    for module, name, ispkg in walk_packages([path_join(abspath("."), loc)], "%s." % loc):
+        if ispkg: continue
+        print name
         m = import_files(name, filter_func)
         if m: modules.append(m)
 
@@ -43,7 +44,7 @@ def import_files(name, filter_func):
         modules = {n: m for n, m in getmembers(__import__(module_name)) if not n.startswith("__") and ismodule(m)}
 
         for name, module in modules.iteritems():
-            if module in EXISTS: continue
+            # if module in EXISTS: continue
             members = []
             for n, m in getmembers(module):
                 if not n.startswith("__") and \
