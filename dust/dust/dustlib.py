@@ -108,10 +108,6 @@ class SMTPClient(object):
         self.stream.read_until(end, callback)
 
 
-    def loop(self):
-        pass
-
-
     def send_mail(self, frm, to, msg, options=None):
         options = options or []
         yield self.cmd_helo(self.hostname)
