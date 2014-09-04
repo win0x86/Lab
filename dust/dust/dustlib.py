@@ -20,13 +20,17 @@ class SMTPClientBaseException(Exception):
     pass
 
 
+
+class SMTPClientException(SMTPClientBaseException):
+    pass
+
+
+
 class SMTPClientConnectError(SMTPClientBaseException):
     def __init__(self, code, msg):
         self.code = code
         self.error = msg
         self.args = (code, msg)
-
-
 
 
 
@@ -38,6 +42,7 @@ class SMTPClient(object):
         self.hostname = hostname
         self.timeout = timeout
         self.connect(self.host, self.port)
+        self.connected = False
 
 
     def _get_socket(self, host, port, timeout):
@@ -78,7 +83,7 @@ class SMTPClient(object):
         self.stream.close()
         self.sock.close()
 
-    
+
     def auth(self, user, passwd):
         pass
 
@@ -101,6 +106,7 @@ class SMTPClient(object):
 
 
     def execute(self, cmd, callback, params="", end=CRLF):
+        if not self.connected: raise SMTPClientException("Unconnected.")
         cmdline = "%s %s" % (cmd, params)
         cmdline = "%s%s" % (cmdline.strip(), end)
         print "cmdline:", repr(cmdline)
@@ -108,7 +114,8 @@ class SMTPClient(object):
         self.stream.read_until(end, callback)
 
 
-    def send_mail(self, frm, to, msg, options=None):
+    def send_mail(self, frm, to_addrs, msg,
+                  options=None, host=None, port=None):
         options = options or []
         yield self.cmd_helo(self.hostname)
         # FIXME.
