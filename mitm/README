@@ -1,0 +1,27 @@
+# MIT
+2014-09-05
+
+Requirements:
+
+        flask
+        jinja2
+        mitmproxy
+        markupsafe
+        netlib
+        pyasn1
+        requests
+        urwid
+        werkzeug
+
+
+1. Tools:
+   a) mit.py
+   b) url.py
+
+
+2. Gen some keys.
+> openssl genrsa -out cert.key 8192
+> openssl req -new -x509 -key cert.key -out cert.crt
+    (Specify the mitm domain as Common Name, e.g. *.google.com)
+> cat cert.key cert.crt > cert.pem
+> mitmproxy --cert=cert.pem
