@@ -47,9 +47,9 @@ class MyFlowMaster(flow.FlowMaster):
             query = b64encode(query)
             url = b64encode(url)
         except Exception as ex:
-            log.e("Error Query: %s", query)
             log.e("Except message: %s", ex.message)
-        log.i("%s %s %s==%s %d %s %s %s", req.method, req.scheme, content_type, req.host, req.port, req.path, query, url)
+        else:
+            log.i("%s %s %s==%s %d %s %s %s", req.method, req.scheme, content_type, req.host, req.port, req.path, query, url)
 
 
 

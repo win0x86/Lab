@@ -51,7 +51,7 @@ def analyze_log(f):
                 print "%4d IGNORE %s" %(no, ex)
 
 
-def run(code):
+def run():
     log_files = get_log_files()
 
     for f in log_files:
@@ -93,4 +93,4 @@ if __name__ == "__main__":
     if code == "test":
         test()
     else:
-        run(code)
+        run()
