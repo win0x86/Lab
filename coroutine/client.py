@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import yappi # 性能分析
+
 from tornado.ioloop import IOLoop
 from tornado.httpclient import AsyncHTTPClient
 
@@ -28,9 +30,12 @@ def run():
     global all_task
     all_task = len(urls)
 
+    yappi.start()
     for url in urls:
         fetch(host + url)
         print "fetch url:", url
+
+    yappi.get_func_stats().print_all()
     IOLoop.instance().start()
 
 
